@@ -1,7 +1,10 @@
 require("dotenv").config();
 import http from "http";
 import { ApolloServer } from "apollo-server-express";
-import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
+import {
+  ApolloServerPluginDrainHttpServer,
+  ApolloServerPluginLandingPageGraphQLPlayground,
+} from "apollo-server-core";
 import express from "express";
 import logger from "morgan";
 import { graphqlUploadExpress } from "graphql-upload";
@@ -19,7 +22,10 @@ async function startServer() {
     resolvers,
     playground: true,
     introspection: true,
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    plugins: [
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      ApolloServerPluginLandingPageGraphQLPlayground(),
+    ],
     context: async (ctx) => {
       if (ctx.req) {
         return {
@@ -60,12 +66,6 @@ async function startServer() {
   👾Graphql: http://localhost:${PORT}${apollo.graphqlPath}`
     );
   });
-  // httpServer.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
-  //   console.log(`
-  //   🚀  Server is ready at ${url}
-  //   📭  Query at https://studio.apollographql.com/dev
-  // `);
-  // });
 }
 
 startServer();
