@@ -23,6 +23,7 @@
   "homepage": "https://github.com/olyesung/nomadcoffee-backend#readme",
   "dependencies": {
     "@babel/cli": "^7.16.0",
+    "@babel/runtime": "^7.16.3",
     "@graphql-tools/load-files": "^6.5.2",
     "@graphql-tools/merge": "^8.2.1",
     "@graphql-tools/schema": "^8.3.1",
@@ -32,11 +33,11 @@
     "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "fs-capacitor": "^6.2.0",
     "graphql": "^16.0.1",
     "graphql-upload": "^13.0.0",
     "jsonwebtoken": "^8.5.1",
-    "morgan": "^1.10.0",
-    "fs-capacitor": "^6.2.0"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
