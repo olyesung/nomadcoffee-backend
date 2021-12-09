@@ -8,7 +8,7 @@ import { graphqlUploadExpress } from "graphql-upload";
 import { typeDefs, resolvers } from "./schema";
 import { getUser } from "./users/users.utils";
 
-const PORT = process.env.PORT;
+// const PORT = process.env.PORT;
 
 async function startServer() {
   const app = express();
@@ -54,11 +54,17 @@ async function startServer() {
   app.use(logger("tiny"));
   app.use("/static", express.static("uploads"));
 
-  httpServer.listen(PORT, () => {
-    console.log(
-      `🚀Server is running on http://localhost:${PORT} ✅
-👾Graphql: http://localhost:${PORT}${apollo.graphqlPath}`
-    );
+  //   httpServer.listen(PORT, () => {
+  //     console.log(
+  //       `🚀Server is running on http://localhost:${PORT} ✅
+  // 👾Graphql: http://localhost:${PORT}${apollo.graphqlPath}`
+  //     );
+  //   });
+  httpServer.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
+    console.log(`
+    🚀  Server is ready at ${url}
+    📭  Query at https://studio.apollographql.com/dev
+  `);
   });
 }
 
