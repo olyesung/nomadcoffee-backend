@@ -15,3 +15,12 @@ nomadcoffee Backend.
 - [x] See Following w/ Pagination
 - [x] Computed Fields
 - [x] Search Users
+
+## coffeeshop
+
+- [x] createCoffeeShop
+- [x] SeeCoffeeShops
+- [x] SeeCoffeeShop
+- [x] seeCategory
+- [x] seeCategories
+- [x] editCoffeeShop
