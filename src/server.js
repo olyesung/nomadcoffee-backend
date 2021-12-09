@@ -54,7 +54,7 @@ async function startServer() {
   app.use(logger("tiny"));
   app.use("/static", express.static("uploads"));
 
-  httpServer.listen({ port: PORT }, () => {
+  httpServer.listen(PORT, () => {
     console.log(
       `🚀Server is running on http://localhost:${PORT} ✅
 👾Graphql: http://localhost:${PORT}${apollo.graphqlPath}`
