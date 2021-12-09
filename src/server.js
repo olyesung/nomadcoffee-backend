@@ -20,8 +20,6 @@ async function startServer() {
   const apollo = new ApolloServer({
     typeDefs,
     resolvers,
-    playground: true,
-    introspection: true,
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
       ApolloServerPluginLandingPageGraphQLPlayground(),
