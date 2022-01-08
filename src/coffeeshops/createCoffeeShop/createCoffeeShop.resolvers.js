@@ -7,41 +7,49 @@ export default {
     createCoffeeShop: protectedResolver(
       async (
         _,
-        { name, latitude, longitude, caption, file },
+        { name, latitude, longitude, category, file },
         { loggedInUser }
       ) => {
-        let categoryObj = [];
-        if (caption) {
-          categoryObj = processCategories(caption);
-        }
-        let photoUrl = null;
-        if (file) {
-          photoUrl = await processFile(file, loggedInUser.id);
-        }
-        return client.coffeeShop.create({
-          data: {
-            name,
-            latitude,
-            longitude,
-            user: {
-              connect: {
-                id: loggedInUser.id,
-              },
-            },
-            ...(caption && {
-              categories: {
-                connectOrCreate: categoryObj,
-              },
-            }),
-            ...(file && {
-              photos: {
-                create: {
-                  url: photoUrl,
+        try {
+          const shop = await client.coffeeShop.create({
+            data: {
+              name,
+              latitude,
+              longitude,
+              user: {
+                connect: {
+                  id: loggedInUser.id,
                 },
               },
-            }),
-          },
-        });
+              categories: {
+                connectOrCreate: processCategories(category),
+              },
+            },
+          });
+
+          if (file) {
+            const photoUrl = await processFile(file, loggedInUser.id);
+            await client.coffeeShopPhoto.create({
+              data: {
+                url: photoUrl,
+                shop: {
+                  connect: {
+                    id: shop.id,
+                  },
+                },
+              },
+            });
+          }
+
+          return {
+            ok: true,
+          };
+        } catch (error) {
+          return {
+            ok: false,
+            error: `${error}`,
+          };
+        }
       }
     ),
   },

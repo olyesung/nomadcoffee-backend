@@ -8,11 +8,11 @@ export default {
     editCoffeeShop: protectedResolver(
       async (
         _,
-        { id, name, latitude, longitude, caption, file },
+        { id, name, latitude, longitude, category, file },
         { loggedInUser }
       ) => {
         let beforeCategory = [];
-        if (caption) {
+        if (category) {
           beforeCategory = await client.coffeeShop.findFirst({
             where: { id, userId: loggedInUser.id },
             include: { categories: { select: { name: true } } },
@@ -48,10 +48,10 @@ export default {
             latitude,
             longitude,
 
-            ...(caption && {
+            ...(category && {
               categories: {
                 disconnect: beforeCategory.categories,
-                connectOrCreate: processCategories(caption),
+                connectOrCreate: processCategories(category),
               },
             }),
 

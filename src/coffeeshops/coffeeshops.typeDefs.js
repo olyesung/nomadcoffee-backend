@@ -1,15 +1,9 @@
 import { gql } from "apollo-server";
 
 export default gql`
-  type CoffeeShopPhoto {
-    id: Int
-    url: String
-    shop: CoffeeShop
-  }
-
   type CoffeeShop {
     id: Int!
-    name: String
+    name: String!
     user: User!
     latitude: String
     longitude: String
@@ -17,6 +11,7 @@ export default gql`
     file: String
     photos: [CoffeeShopPhoto]
     categories: [Category]
+    isMine: Boolean!
   }
 
   type Category {
@@ -25,5 +20,11 @@ export default gql`
     slug: String
     shops(page: Int!): [CoffeeShop]
     totalShops: Int!
+  }
+
+  type CoffeeShopPhoto {
+    id: Int!
+    url: String!
+    shop: CoffeeShop!
   }
 `;

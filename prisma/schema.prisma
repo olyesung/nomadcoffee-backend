@@ -50,7 +50,7 @@ model Category {
 
 model CoffeeShopPhoto {
   id           Int        @id @default(autoincrement())
-  url          String?
+  url          String
   shop         CoffeeShop @relation(fields: [coffeeShopId], references: [id])
   coffeeShopId Int
   createdAt    DateTime   @default(now())
