@@ -2,7 +2,7 @@ import client from "../../client";
 
 export default {
   Query: {
-    searchCoffeeshops: (_, { keyword }) => {
+    searchCoffeeShops: (_, { keyword }) => {
       return client.coffeeShop.findMany({
         where: {
           name: {
