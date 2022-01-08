@@ -5,7 +5,7 @@ export default {
     searchCoffeeshops: (_, { keyword }) => {
       return client.coffeeShop.findMany({
         where: {
-          caption: {
+          name: {
             contains: keyword,
           },
         },
